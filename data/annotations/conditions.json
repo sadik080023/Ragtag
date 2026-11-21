@@ -1,0 +1,545 @@
+{
+ "REQ-01": {
+  "conditions": [
+   "System accepts login with valid email and password",
+   "System rejects login with invalid password",
+   "System rejects login with invalid email",
+   "System rejects login with empty fields",
+   "System locks account after three consecutive failed attempts",
+   "System unlocks account after 30 minutes"
+  ],
+  "edge_scenarios": [
+   "Exactly three consecutive failed attempts trigger the lockout",
+   "Successful login resets the consecutive failure counter",
+   "Attempting login 29 minutes after the third failure is rejected",
+   "Attempting login 31 minutes after the third failure is accepted"
+  ]
+ },
+ "REQ-02": {
+  "conditions": [
+   "User requests a password reset.",
+   "System sends a password reset email.",
+   "User clicks the reset link.",
+   "User enters a new password.",
+   "System updates the user's password."
+  ],
+  "edge_scenarios": [
+   "User clicks the reset link after 15 minutes.",
+   "User clicks the reset link after 16 minutes.",
+   "User clicks the reset link immediately.",
+   "User uses another user's reset link."
+  ]
+ },
+ "REQ-03": {
+  "conditions": [
+   "System accepts a keyword input from the user.",
+   "System returns a list of products matching the provided keyword.",
+   "System displays the search results to the user.",
+   "System handles empty or whitespace-only input fields."
+  ],
+  "edge_scenarios": [
+   "Search for a keyword that returns zero matching products.",
+   "Search for a keyword exceeding the maximum character limit.",
+   "Search for a keyword containing special characters or symbols.",
+   "Verify the 'no results' message is displayed when the search yields zero matches.",
+   "Verify popular products are suggested when no results are found."
+  ]
+ },
+ "REQ-04": {
+  "conditions": [
+   "User can add a product to the shopping cart.",
+   "System creates a new cart entry for a new product.",
+   "System increments the quantity for an existing product.",
+   "System prevents duplicate product entries."
+  ],
+  "edge_scenarios": [
+   "Adding the same product twice in rapid succession.",
+   "Adding a product with a quantity of 0.",
+   "Adding a product that is already in the cart with the maximum allowed quantity.",
+   "Attempting to add a product with a negative quantity."
+  ]
+ },
+ "REQ-05": {
+  "conditions": [
+   "System accepts a 16-digit numeric card number.",
+   "System rejects a card number with fewer than 16 digits.",
+   "System rejects a card number with more than 16 digits.",
+   "System rejects a card number containing non-numeric characters.",
+   "System rejects an invalid card number (fails Luhn check).",
+   "System rejects an expired card."
+  ],
+  "edge_scenarios": [
+   "Inputting a card number with spaces or dashes.",
+   "Inputting a 15-digit card number.",
+   "Inputting a 17-digit card number.",
+   "Submitting an empty card number field.",
+   "Entering a card with a past expiry date."
+  ]
+ },
+ "REQ-06": {
+  "conditions": [
+   "User can update non-email profile fields",
+   "User can initiate an email address change",
+   "System requires re-verification for email changes",
+   "System sends a verification email to the new address",
+   "User can click the verification link",
+   "System updates the email address upon successful verification"
+  ],
+  "edge_scenarios": [
+   "Attempt to update email with an invalid format",
+   "Attempt to verify with an expired token",
+   "Attempt to verify with a token intended for another user",
+   "Verification link is not found in the spam folder"
+  ]
+ },
+ "REQ-07": {
+  "conditions": [
+   "Upload a valid JPG file",
+   "Upload a valid PNG file",
+   "Upload a file larger than 5 MB",
+   "Upload a file smaller than 5 MB",
+   "Upload a file exactly 5 MB",
+   "Upload a file in an unsupported format"
+  ],
+  "edge_scenarios": [
+   "Upload a file just over the 5 MB limit (e.g., 5.1 MB)",
+   "Upload a file just under the 5 MB limit (e.g., 4.9 MB)",
+   "Upload a file with a valid extension but incorrect file content",
+   "Upload a file with no file extension"
+  ]
+ },
+ "REQ-08": {
+  "conditions": [
+   "System accepts search input with exactly 2 characters.",
+   "System rejects search input with fewer than 2 characters.",
+   "System sanitizes special characters in the input string.",
+   "System processes the sanitized input for search results."
+  ],
+  "edge_scenarios": [
+   "Inputting exactly 1 character triggers a validation error.",
+   "Inputting only special characters (e.g., '@#$') executes a search.",
+   "Inputting mixed alphanumeric and special characters (e.g., 'ab@cd') executes a sanitized search.",
+   "Inputting zero characters triggers a validation error."
+  ]
+ },
+ "REQ-09": {
+  "conditions": [
+   "User can select a valid future date.",
+   "User can select a time slot.",
+   "Past dates are disabled or unselectable.",
+   "Confirmation message is displayed after booking.",
+   "Appointment is successfully created."
+  ],
+  "edge_scenarios": [
+   "Selecting exactly today's date (boundary).",
+   "Attempting to select a date exactly one year ago (negative).",
+   "Submitting the booking without selecting a time slot (alternative).",
+   "Selecting a time slot outside the allowed operating hours (negative)."
+  ]
+ },
+ "REQ-10": {
+  "conditions": [
+   "System validates the card expiry date format.",
+   "System rejects expired cards.",
+   "System rejects cards with insufficient funds.",
+   "System displays a specific error message for expired cards.",
+   "System displays a specific error message for insufficient funds.",
+   "System processes valid cards with sufficient funds."
+  ],
+  "edge_scenarios": [
+   "Card expiring exactly today.",
+   "Card expiring exactly one year in the future.",
+   "Card expiring exactly one year in the past.",
+   "Card with zero available balance.",
+   "Card with negative available balance."
+  ]
+ },
+ "REQ-11": {
+  "conditions": [
+   "User initiates removal of an item from the cart",
+   "The item is removed from the cart list",
+   "The item count decreases by one",
+   "The cart remains functional after removal"
+  ],
+  "edge_scenarios": [
+   "Removing the last item displays the empty-cart message",
+   "Attempting to remove an item when the cart is empty",
+   "Removing an item when the cart contains multiple items"
+  ]
+ },
+ "REQ-12": {
+  "conditions": [
+   "User can enable email notifications.",
+   "User can disable email notifications.",
+   "Digest is sent at 8 AM when pending notifications exist.",
+   "Digest is not sent at 8 AM when no pending notifications exist.",
+   "Digest is not sent at 8 AM when notifications are disabled."
+  ],
+  "edge_scenarios": [
+   "Digest is not sent at 8 AM when the email server is unavailable.",
+   "Digest is not sent at 8 AM when the user has unsubscribed from notifications.",
+   "Digest is not sent at 8 AM when the user has blocked the sender domain.",
+   "Digest is sent at 8 AM when multiple pending notifications exist."
+  ]
+ },
+ "REQ-13": {
+  "conditions": [
+   "System accepts password change when current password is correct.",
+   "System rejects password change when current password is incorrect.",
+   "System accepts password change when new password is exactly 8 characters.",
+   "System accepts password change when new password is longer than 8 characters.",
+   "System rejects password change when new password is shorter than 8 characters."
+  ],
+  "edge_scenarios": [
+   "System rejects password change when new password is empty.",
+   "System rejects password change when new password is exactly 7 characters.",
+   "System rejects password change when current password field is left blank.",
+   "System rejects password change when new password contains only whitespace."
+  ]
+ },
+ "REQ-14": {
+  "conditions": [
+   "System logs out user after 15 minutes of inactivity.",
+   "System preserves unsaved form data as a draft upon logout.",
+   "System prevents logout if user interacts within the 15-minute window.",
+   "System redirects user to the login page after automatic logout.",
+   "System allows user to retrieve draft data after re-login."
+  ],
+  "edge_scenarios": [
+   "Logout occurs exactly at the 15-minute mark.",
+   "Logout occurs exactly 1 second before the 15-minute mark.",
+   "User performs an action exactly at the 14-minute and 59-second mark to reset the timer.",
+   "User attempts to access a protected page immediately after automatic logout."
+  ]
+ },
+ "REQ-15": {
+  "conditions": [
+   "Unverified users cannot submit reviews.",
+   "Verified users can submit reviews.",
+   "Reviews exceeding 500 characters are rejected.",
+   "Reviews under 500 characters are accepted.",
+   "Submitted reviews are not immediately visible.",
+   "Moderated reviews become visible."
+  ],
+  "edge_scenarios": [
+   "Submit a review with exactly 500 characters.",
+   "Submit a review with 501 characters.",
+   "Submit a review as an unverified user.",
+   "Submit an empty review."
+  ]
+ },
+ "REQ-16": {
+  "conditions": [
+   "User can cancel order if placed less than 30 minutes ago.",
+   "User cannot cancel order if placed more than 30 minutes ago.",
+   "User cannot cancel order exactly 30 minutes after placement.",
+   "Refund is initiated immediately upon successful cancellation.",
+   "Refund is processed to the original payment method.",
+   "Refund amount matches the original order total."
+  ],
+  "edge_scenarios": [
+   "Attempting to cancel exactly at the 30-minute mark.",
+   "Attempting to cancel an order placed 31 minutes ago.",
+   "Refund fails due to payment gateway error.",
+   "Canceling an order with a pending partial payment."
+  ]
+ },
+ "REQ-17": {
+  "conditions": [
+   "User can add a new delivery address",
+   "User can view a list of saved delivery addresses",
+   "User can select an address as the default",
+   "User can delete a saved delivery address",
+   "User can edit an existing saved delivery address",
+   "System prevents adding a fourth delivery address",
+   "Checkout process automatically selects the default address"
+  ],
+  "edge_scenarios": [
+   "Attempting to add a 4th address when 3 are already saved",
+   "Deleting the currently selected default address",
+   "Editing the details of the default address",
+   "Changing the delivery address during the checkout process",
+   "Saving an address with invalid or missing required fields"
+  ]
+ },
+ "REQ-18": {
+  "conditions": [
+   "Email is sent immediately after registration.",
+   "Clicking the verification link activates the account.",
+   "The verification link remains valid for exactly 24 hours.",
+   "Clicking the link after 24 hours results in failure.",
+   "A new verification link can be requested after the previous one expires.",
+   "Clicking the link multiple times does not create duplicate accounts."
+  ],
+  "edge_scenarios": [
+   "Clicking the link exactly at the 24-hour expiration boundary.",
+   "Clicking the link 1 minute after the expiration time.",
+   "Requesting a new verification link while the previous one is still valid.",
+   "Clicking a verification link from a different user's email."
+  ]
+ },
+ "REQ-19": {
+  "conditions": [
+   "System generates a 6-digit OTP upon login request when 2FA is enabled.",
+   "OTP is delivered to the user's registered phone number.",
+   "OTP remains valid for 5 minutes from generation.",
+   "Login is blocked after 3 consecutive incorrect OTP entries."
+  ],
+  "edge_scenarios": [
+   "Attempting login with an OTP that has expired (just over 5 minutes).",
+   "Entering 3 consecutive incorrect OTP codes.",
+   "Submitting an empty OTP field.",
+   "Submitting an OTP containing non-numeric characters."
+  ]
+ },
+ "REQ-20": {
+  "conditions": [
+   "\"Add to Cart\" button is disabled when stock is 0",
+   "\"Buy Now\" button is disabled when stock is 0",
+   "User can successfully subscribe to stock notification",
+   "User receives a confirmation message after subscribing",
+   "User receives a notification when stock is replenished"
+  ],
+  "edge_scenarios": [
+   "Attempting to purchase an out-of-stock product results in an error message",
+   "Attempting to subscribe to notifications while logged out is blocked",
+   "Unsubscribing from stock notifications removes the user from the list",
+   "Subscribing to notifications for a product that is already in stock"
+  ]
+ },
+ "REQ-21": {
+  "conditions": [
+   "Coupon is currently within its validity period",
+   "Order total strictly exceeds the coupon's minimum order value",
+   "Only one coupon code is applied to the order",
+   "Discount is applied when both validity and minimum order conditions are met"
+  ],
+  "edge_scenarios": [
+   "Order total equals the coupon's minimum order value",
+   "Order total is less than the coupon's minimum order value",
+   "Coupon is expired or future-dated",
+   "Two different coupons are applied to the same order",
+   "Coupon is valid but order total is below the minimum threshold"
+  ]
+ },
+ "REQ-22": {
+  "conditions": [
+   "First page displays exactly 20 results.",
+   "Second page displays the next 20 results.",
+   "Total page count is calculated correctly.",
+   "Previous button is disabled on page 1.",
+   "Next button is disabled on the last page.",
+   "Pagination controls are visible."
+  ],
+  "edge_scenarios": [
+   "Clicking 'Next' on the last page shows the empty state message.",
+   "Clicking 'Next' on the last page does not crash the application.",
+   "Clicking 'Next' on the last page keeps the user on the last page.",
+   "Search returns 0 results and displays empty state."
+  ]
+ },
+ "REQ-23": {
+  "conditions": [
+   "User can sort products by price ascending.",
+   "User can sort products by price descending.",
+   "User can sort products by rating.",
+   "User can apply a category filter.",
+   "User can combine a category filter with a price sort.",
+   "The sort and filter state persists after performing a new search within the same session."
+  ],
+  "edge_scenarios": [
+   "Sorting by price when the minimum price is 0.",
+   "Changing the sort order while a category filter is active.",
+   "The sort/filter state persists after a search returns zero results.",
+   "The sort/filter state is lost when the session expires.",
+   "Selecting a category filter that contains no products."
+  ]
+ },
+ "REQ-24": {
+  "conditions": [
+   "Application provides English language selection option.",
+   "Application provides Chinese language selection option.",
+   "Switching to English updates all interface text.",
+   "Switching to Chinese updates all interface text.",
+   "Language preference persists after application restart.",
+   "All menus display in the selected language.",
+   "All messages display in the selected language."
+  ],
+  "edge_scenarios": [
+   "Language preference reverts to default after application crash.",
+   "Some interface elements fail to translate after language switch.",
+   "Switching languages while a transaction is in progress.",
+   "Switching between languages multiple times rapidly."
+  ]
+ },
+ "REQ-25": {
+  "conditions": [
+   "System rejects comment containing a banned word.",
+   "System displays the specific banned word to the user.",
+   "System accepts comment without banned words.",
+   "System rejects comment regardless of case sensitivity."
+  ],
+  "edge_scenarios": [
+   "Comment contains multiple banned words.",
+   "Banned word is a substring of a valid word.",
+   "Banned word is at the very beginning or end of the comment.",
+   "User attempts to bypass filter using special characters."
+  ]
+ },
+ "REQ-26": {
+  "conditions": [
+   "Verify the system generates a downloadable file for order history.",
+   "Verify the downloaded file is in CSV format.",
+   "Verify the CSV content matches the user's order history.",
+   "Verify the account owner can successfully download the file.",
+   "Verify a non-account owner is denied access to the download feature."
+  ],
+  "edge_scenarios": [
+   "Attempting to download order history while logged out.",
+   "Attempting to download order history using another user's credentials.",
+   "Downloading order history when the account has no past orders.",
+   "Verifying the CSV file handles special characters in order details correctly."
+  ]
+ },
+ "REQ-27": {
+  "conditions": [
+   "Sending 1 request returns 200 OK",
+   "Sending 100 requests within 60 seconds returns 200 OK for all",
+   "Sending 101 requests within 60 seconds returns 429 status code",
+   "The response includes the 'retry-after' header",
+   "The 'retry-after' header value is a valid integer"
+  ],
+  "edge_scenarios": [
+   "Sending exactly 100 requests at the 59-second mark",
+   "Sending exactly 100 requests at the 60-second mark",
+   "Sending exactly 101 requests at the 60-second mark",
+   "Sending requests with 1ms intervals to test concurrency",
+   "Sending requests after a 2-minute gap to verify counter reset"
+  ]
+ },
+ "REQ-28": {
+  "conditions": [
+   "Draft saves automatically every 60 seconds",
+   "Draft saves when user navigates away",
+   "Draft restores upon page reload",
+   "Draft restores if user returns within 7 days",
+   "Restored draft contains all previously entered data",
+   "Draft saves even if the form is incomplete"
+  ],
+  "edge_scenarios": [
+   "Draft is not restored if user returns after 7 days",
+   "User returns exactly at the 7-day boundary",
+   "User edits data while the auto-save timer is running",
+   "Draft saves successfully despite intermittent network connection"
+  ]
+ },
+ "REQ-29": {
+  "conditions": [
+   "System generates the monthly usage report on the first day of the month.",
+   "The generated report is in PDF format.",
+   "The report contains usage data.",
+   "System sends an email alert to the administrator if generation fails.",
+   "System does not send an email alert if generation succeeds."
+  ],
+  "edge_scenarios": [
+   "Report generation fails on the first day of the month.",
+   "Generated PDF file is empty or corrupted.",
+   "Email alert fails to send due to server error.",
+   "Report is generated after the first day of the month.",
+   "Administrator email address is invalid."
+  ]
+ },
+ "REQ-30": {
+  "conditions": [
+   "Guest checkout initiates without account creation",
+   "Email field is mandatory during guest checkout",
+   "System accepts a valid email format",
+   "System rejects an invalid email format",
+   "Order confirmation is generated upon successful purchase"
+  ],
+  "edge_scenarios": [
+   "Submitting checkout with an empty email field",
+   "Submitting checkout with an email containing only spaces",
+   "Submitting checkout with an email missing the '@' symbol",
+   "Submitting checkout with an email missing the domain extension",
+   "Submitting checkout with an extremely long email string"
+  ]
+ },
+ "REQ-31": {
+  "conditions": [
+   "User initiates subscription cancellation",
+   "System records the cancellation timestamp",
+   "System maintains full access until the billing period ends",
+   "System suspends access immediately after the billing period expires",
+   "System does not generate a partial refund"
+  ],
+  "edge_scenarios": [
+   "Cancel a subscription that has already been canceled",
+   "Cancel immediately after a successful payment",
+   "Attempt to request a partial refund after cancellation",
+   "Cancel exactly at the end of the billing period"
+  ]
+ },
+ "REQ-32": {
+  "conditions": [
+   "Admin user can successfully delete a target user account.",
+   "Non-admin user cannot delete a target user account.",
+   "Audit log entry is created upon successful deletion.",
+   "Audit log entry contains the admin's user ID.",
+   "Audit log entry contains the deletion timestamp."
+  ],
+  "edge_scenarios": [
+   "Attempting deletion with a non-admin role (e.g., editor).",
+   "Attempting deletion with an invalid/expired session token.",
+   "Attempting to delete a non-existent user account.",
+   "Attempting to delete the currently logged-in admin account."
+  ]
+ },
+ "REQ-33": {
+  "conditions": [
+   "Start date input is accepted.",
+   "End date input is accepted.",
+   "Orders are filtered correctly for valid date ranges.",
+   "Start date later than end date is rejected.",
+   "Date range exceeding one year is rejected."
+  ],
+  "edge_scenarios": [
+   "Start date equals end date.",
+   "Start date is exactly one year before end date.",
+   "Start date is one day more than one year before end date.",
+   "Start date is later than end date.",
+   "End date is earlier than start date."
+  ]
+ },
+ "REQ-34": {
+  "conditions": [
+   "Inventory level is 9 or less to trigger the alert",
+   "Email is sent to the warehouse manager",
+   "Email is sent only once per 24-hour period",
+   "Email is not sent when inventory is 10 or higher",
+   "Email stops sending once inventory is restocked above 10"
+  ],
+  "edge_scenarios": [
+   "Inventory is exactly 10 (boundary value - no alert expected)",
+   "Inventory is 0 (extreme boundary - alert expected)",
+   "Inventory drops below 10, email sent, but restocked to 11 within the same day",
+   "Inventory drops below 10, email sent, but warehouse manager email is invalid"
+  ]
+ },
+ "REQ-35": {
+  "conditions": [
+   "System accepts valid fingerprint for login.",
+   "System accepts valid face recognition for login.",
+   "System rejects invalid fingerprint attempts.",
+   "System rejects invalid face recognition attempts.",
+   "System prompts for PIN after 5 failed biometric attempts.",
+   "System accepts valid PIN after 5 failed attempts."
+  ],
+  "edge_scenarios": [
+   "System requires PIN entry after exactly 5 failed attempts.",
+   "System resets the failed attempt counter after a successful login.",
+   "System handles biometric hardware unavailability gracefully.",
+   "System allows PIN entry when biometric permissions are denied."
+  ]
+ }
+}

@@ -1,0 +1,42 @@
+{
+  "REQ-02": {
+    "conditions": {"b": ["y","y","y",null,null], "r": ["y","y","y",null,null]},
+    "edges": {"b": [null,null,null,null], "r": [null,null,null,null]}
+  },
+  "REQ-04": {
+    "conditions": {"b": ["y","y","y","y"], "r": ["y","y","y","y"]},
+    "edges": {"b": [null,null,null,null], "r": [null,null,null,null]}
+  },
+  "REQ-05": {
+    "conditions": {"b": ["y",null,null,null,null,"y"], "r": ["y",null,"y","y",null,"y"]},
+    "edges": {"b": [null,null,null,null,"y"], "r": [null,null,"y","y","y"]}
+  },
+  "REQ-08": {
+    "conditions": {"b": [null,"y",null,null], "r": [null,"y",null,null]},
+    "edges": {"b": [null,null,null,null], "r": [null,null,null,"y"]}
+  },
+  "REQ-16": {
+    "conditions": {"b": ["y","y",null,null,"y",null], "r": ["y","y",null,null,"y",null]},
+    "edges": {"b": [null,null,null,null], "r": ["y",null,null,null]}
+  },
+  "REQ-18": {
+    "conditions": {"b": [null,"y",null,"y","y",null], "r": [null,"y",null,"y","y",null]},
+    "edges": {"b": [null,null,null,null], "r": ["y",null,null,null]}
+  },
+  "REQ-22": {
+    "conditions": {"b": ["y","y",null,null,null,null], "r": ["y","y",null,"y",null,null]},
+    "edges": {"b": [null,null,null,null], "r": [null,null,null,null]}
+  },
+  "REQ-24": {
+    "conditions": {"b": ["y","y",null,null,null,"y","y"], "r": ["y","y",null,null,"y","y","y"]},
+    "edges": {"b": [null,null,null,null], "r": [null,null,null,null]}
+  },
+  "REQ-29": {
+    "conditions": {"b": ["y","y",null,"y",null], "r": ["y","y",null,"y",null]},
+    "edges": {"b": ["y",null,null,null,null], "r": ["y",null,null,"y",null]}
+  },
+  "REQ-35": {
+    "conditions": {"b": [null,null,null,null,"y","y"], "r": [null,null,null,null,"y","y"]},
+    "edges": {"b": ["y",null,null,null], "r": ["y",null,"y",null]}
+  }
+}
